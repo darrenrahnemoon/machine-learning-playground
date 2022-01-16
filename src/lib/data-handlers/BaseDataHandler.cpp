@@ -1,6 +1,9 @@
 #include <vector>
+#include <memory>
 #include <unordered_set>
+#include <iostream>
 
+#include "lib/debug.cpp"
 #include "lib/data-handlers/BaseDataHandler.hpp"
 #include "entities/DataUnit.hpp"
 
@@ -8,10 +11,10 @@ namespace ML {
 
 	template<typename LabelType, typename FeatureType>
 	BaseDataHandler<LabelType, FeatureType>::BaseDataHandler() {
-		this->rawData = new std::vector<DataUnit<LabelType, FeatureType>*>;
-		this->trainingData = new std::vector<DataUnit<LabelType, FeatureType>*>;
-		this->testingData = new std::vector<DataUnit<LabelType, FeatureType>*>;
-		this->validationData = new std::vector<DataUnit<LabelType, FeatureType>*>;
+		this->rawData = new std::vector<std::shared_ptr<DataUnit<LabelType, FeatureType>>>;
+		this->trainingData = new std::vector<std::shared_ptr<DataUnit<LabelType, FeatureType>>>;
+		this->testingData = new std::vector<std::shared_ptr<DataUnit<LabelType, FeatureType>>>;
+		this->validationData = new std::vector<std::shared_ptr<DataUnit<LabelType, FeatureType>>>;
 	}
 
 	template<typename LabelType, typename FeatureType>
@@ -29,13 +32,22 @@ namespace ML {
 	}
 
 	template<typename LabelType, typename FeatureType>
-	void BaseDataHandler<LabelType, FeatureType>::randomlyDistributeData() {
-		std::unordered_set<int> usedIndexes;
+	void BaseDataHandler<LabelType, FeatureType>::allocateDataAtRandom() {
+		debug::timer timer("Allocating data at random");
+
 		auto& rawData = this->rawData;
-		int& rawDataSize = this->rawData->size();
+		int rawDataSize = this->rawData->size();
+		std::unordered_set<int> usedIndexes(rawDataSize);
+
+		// Reserve the vector space to improve performance
 		int trainingDataSize = rawDataSize * this->trainingDataRatio;
+		this->trainingData->reserve(trainingDataSize);
+
 		int testingDataSize = rawDataSize * this->testingDataRatio;
+		this->testingData->reserve(testingDataSize);
+
 		int validationDataSize = rawDataSize * this->validationDataRatio;
+		this->validationData->reserve(validationDataSize);
 
 		auto allocateAtRandom = [&usedIndexes, &rawData, &rawDataSize](auto& array, int&count) {
 			int allocated = 0;
@@ -49,9 +61,9 @@ namespace ML {
 			}
 		};
 
-		allocateAtRandom(trainingData, trainingDataSize);
-		allocateAtRandom(testingData, testingDataSize);
-		allocateAtRandom(validationData, validationDataSize);
+		debug::timer::call("Allocating data points at random to training data", allocateAtRandom, trainingData, trainingDataSize);
+		debug::timer::call("Allocating data points at random to testing data", allocateAtRandom, testingData, testingDataSize);
+		debug::timer::call("Allocating data points at random to validation data", allocateAtRandom, validationData, validationDataSize);
 	}
 }
 

@@ -8,7 +8,9 @@ namespace ML {
 		public :
 			std::vector<FeatureType>* featureVector;
 			LabelType label;
-			DataUnit();
+			DataUnit(const int& featureVectorSize = 0);
 			~DataUnit();
 	};
 };
+
+#include "entities/DataUnit.cpp"

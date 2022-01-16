@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <vector>
 #include <map>
 
@@ -9,10 +10,10 @@ namespace ML {
 	template<typename LabelType, typename FeatureType>
 	class BaseDataHandler {
 		public :
-			std::vector<DataUnit<LabelType, FeatureType>*>* rawData;
-			std::vector<DataUnit<LabelType, FeatureType>*>* trainingData;
-			std::vector<DataUnit<LabelType, FeatureType>*>* testingData;
-			std::vector<DataUnit<LabelType, FeatureType>*>* validationData;
+			std::vector<std::shared_ptr<DataUnit<LabelType, FeatureType>>>* rawData;
+			std::vector<std::shared_ptr<DataUnit<LabelType, FeatureType>>>* trainingData;
+			std::vector<std::shared_ptr<DataUnit<LabelType, FeatureType>>>* testingData;
+			std::vector<std::shared_ptr<DataUnit<LabelType, FeatureType>>>* validationData;
 
 			double trainingDataRatio = 0.75;
 			double testingDataRatio = 0.20;
@@ -27,7 +28,7 @@ namespace ML {
 			/**
 			 * Split the raw data between training, testing, and validation vector
 			 */
-			void randomlyDistributeData();
+			void allocateDataAtRandom();
 	};
 };
 
