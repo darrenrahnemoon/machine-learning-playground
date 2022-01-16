@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "lib/debug.cpp"
-#include "entities/DataUnit.hpp"
+#include "entities/DataPoint.hpp"
 #include "lib/data-handlers/BaseDataHandler.hpp"
 #include "lib/data-handlers/MNISTDataHandler.hpp"
 

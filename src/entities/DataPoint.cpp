@@ -1,10 +1,10 @@
 #include <vector>
-#include "entities/DataUnit.hpp"
+#include "entities/DataPoint.hpp"
 
 namespace ML {
 
 	template<typename LabelType, typename FeatureType>
-	DataUnit<LabelType, FeatureType>::DataUnit(const int& featureVectorSize) {
+	DataPoint<LabelType, FeatureType>::DataPoint(const int& featureVectorSize) {
 		if (!featureVectorSize) {
 			this->featureVector = new std::vector<FeatureType>;
 		}
@@ -14,7 +14,7 @@ namespace ML {
 	}
 
 	template<typename LabelType, typename FeatureType>
-	DataUnit<LabelType, FeatureType>::~DataUnit() {
+	DataPoint<LabelType, FeatureType>::~DataPoint() {
 		delete this->featureVector;
 	}
 

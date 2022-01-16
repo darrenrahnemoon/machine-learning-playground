@@ -4,13 +4,13 @@
 
 namespace ML {
 	template<typename LabelType, typename FeatureType>
-	class DataUnit {
+	class DataPoint {
 		public :
 			std::vector<FeatureType>* featureVector;
 			LabelType label;
-			DataUnit(const int& featureVectorSize = 0);
-			~DataUnit();
+			DataPoint(const int& featureVectorSize = 0);
+			~DataPoint();
 	};
 };
 
-#include "entities/DataUnit.cpp"
+#include "entities/DataPoint.cpp"

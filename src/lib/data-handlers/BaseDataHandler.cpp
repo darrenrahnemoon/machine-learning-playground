@@ -5,16 +5,16 @@
 
 #include "lib/debug.cpp"
 #include "lib/data-handlers/BaseDataHandler.hpp"
-#include "entities/DataUnit.hpp"
+#include "entities/DataPoint.hpp"
 
 namespace ML {
 
 	template<typename LabelType, typename FeatureType>
 	BaseDataHandler<LabelType, FeatureType>::BaseDataHandler() {
-		this->rawData = new std::vector<std::shared_ptr<DataUnit<LabelType, FeatureType>>>;
-		this->trainingData = new std::vector<std::shared_ptr<DataUnit<LabelType, FeatureType>>>;
-		this->testingData = new std::vector<std::shared_ptr<DataUnit<LabelType, FeatureType>>>;
-		this->validationData = new std::vector<std::shared_ptr<DataUnit<LabelType, FeatureType>>>;
+		this->rawData = new std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>;
+		this->trainingData = new std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>;
+		this->testingData = new std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>;
+		this->validationData = new std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>;
 	}
 
 	template<typename LabelType, typename FeatureType>

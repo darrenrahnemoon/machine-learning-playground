@@ -4,16 +4,16 @@
 #include <vector>
 #include <map>
 
-#include "entities/DataUnit.hpp"
+#include "entities/DataPoint.hpp"
 
 namespace ML {
 	template<typename LabelType, typename FeatureType>
 	class BaseDataHandler {
 		public :
-			std::vector<std::shared_ptr<DataUnit<LabelType, FeatureType>>>* rawData;
-			std::vector<std::shared_ptr<DataUnit<LabelType, FeatureType>>>* trainingData;
-			std::vector<std::shared_ptr<DataUnit<LabelType, FeatureType>>>* testingData;
-			std::vector<std::shared_ptr<DataUnit<LabelType, FeatureType>>>* validationData;
+			std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>* rawData;
+			std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>* trainingData;
+			std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>* testingData;
+			std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>* validationData;
 
 			double trainingDataRatio = 0.75;
 			double testingDataRatio = 0.20;

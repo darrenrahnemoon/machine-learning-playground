@@ -8,7 +8,7 @@
 
 #include "lib/debug.cpp"
 #include "lib/data-handlers/MNISTDataHandler.hpp"
-#include "entities/DataUnit.hpp"
+#include "entities/DataPoint.hpp"
 
 namespace ML {
 	using namespace std::string_literals;
@@ -41,12 +41,12 @@ namespace ML {
 		uint32_t imageSize = featureVectorHeader[FeatureVectorHeader["RowSize"]] * featureVectorHeader[FeatureVectorHeader["ColumnSize"]];
 
 		for (int imageIndex = 0; imageIndex < featureVectorHeader[FeatureVectorHeader["NumberOfImages"]]; imageIndex++) {
-			auto data = std::make_shared<DataUnit<uint8_t, uint8_t>>();
+			auto data = std::make_shared<DataPoint<uint8_t, uint8_t>>();
 
-			// Get the label for the DataUnit from the feature label file
+			// Get the label for the DataPoint from the feature label file
 			fread(&(data->label), sizeof(uint8_t), 1, featureLabelFile);
 
-			// Get the pixel values for the DataUnit from the feature vector file
+			// Get the pixel values for the DataPoint from the feature vector file
 			for (int pixelIndex = 0; pixelIndex < imageSize; pixelIndex++) {
 				if (!fread(&pixel, sizeof(uint8_t), 1, featureVectorFile)) {
 					throw std::runtime_error(
