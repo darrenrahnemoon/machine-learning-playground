@@ -10,10 +10,10 @@ namespace ML {
 	template<typename LabelType, typename FeatureType>
 	class BaseDataHandler {
 		public :
-			std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>* rawData;
-			std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>* trainingData;
-			std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>* testingData;
-			std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>* validationData;
+			std::shared_ptr<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>> rawData;
+			std::shared_ptr<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>> trainingData;
+			std::shared_ptr<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>> testingData;
+			std::shared_ptr<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>> validationData;
 
 			double trainingDataRatio = 0.75;
 			double testingDataRatio = 0.20;

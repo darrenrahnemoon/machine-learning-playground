@@ -69,7 +69,17 @@
 		"stack": "cpp",
 		"unordered_set": "cpp",
 		"iostream": "cpp",
-		"__functional_03": "cpp"
+		"__functional_03": "cpp",
+		"__functional_base_03": "cpp",
+		"fstream": "cpp",
+		"future": "cpp",
+		"list": "cpp",
+		"numeric": "cpp",
+		"random": "cpp",
+		"regex": "cpp",
+		"set": "cpp",
+		"thread": "cpp",
+		"variant": "cpp"
 	},
 	"cSpell.words": [
 		"mnist"

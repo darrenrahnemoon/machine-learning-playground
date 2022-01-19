@@ -11,19 +11,14 @@ namespace ML {
 
 	template<typename LabelType, typename FeatureType>
 	BaseDataHandler<LabelType, FeatureType>::BaseDataHandler() {
-		this->rawData = new std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>;
-		this->trainingData = new std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>;
-		this->testingData = new std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>;
-		this->validationData = new std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>;
+		this->rawData = std::make_shared<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>>();
+		this->trainingData = std::make_shared<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>>();
+		this->testingData = std::make_shared<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>>();
+		this->validationData = std::make_shared<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>>();
 	}
 
 	template<typename LabelType, typename FeatureType>
-	BaseDataHandler<LabelType, FeatureType>::~BaseDataHandler() {
-		delete this->rawData;
-		delete this->trainingData;
-		delete this->testingData;
-		delete this->validationData;
-	}
+	BaseDataHandler<LabelType, FeatureType>::~BaseDataHandler() {}
 
 	template<typename LabelType, typename FeatureType>
 	void BaseDataHandler<LabelType, FeatureType>::readFromFile() {
