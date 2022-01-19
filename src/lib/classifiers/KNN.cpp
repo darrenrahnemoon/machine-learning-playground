@@ -16,7 +16,7 @@ namespace ML {
 	KNN<LabelType, FeatureType>::~KNN() {}
 
 	template<typename LabelType, typename FeatureType>
-	LabelType KNN<LabelType, FeatureType>::predictClass(std::shared_ptr<DataPoint<LabelType, FeatureType>> point) {
+	LabelType KNN<LabelType, FeatureType>::predict(std::shared_ptr<DataPoint<LabelType, FeatureType>> point) {
 		std::map<LabelType, int> occurrences;
 		for (auto neighbor : this->getNearestNeighbors(point)) {
 			LabelType& label = neighbor->label;

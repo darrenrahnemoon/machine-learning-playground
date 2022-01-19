@@ -15,7 +15,7 @@ namespace ML {
 			KNN();
 			~KNN();
 
-			LabelType predictClass(Data data);
+			LabelType predict(Data data);
 			std::vector<Data> getNearestNeighbors(Data point);
 	};
 

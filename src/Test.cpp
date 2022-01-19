@@ -18,7 +18,7 @@
 // 		SECTION("K: "s + std::to_string(classifier.k)) {
 // 			int validResults = 0;
 // 			for (auto point : *(dataHandler.testingData)) {
-// 				if (classifier.predictClass(point) == point->label) {
+// 				if (classifier.predict(point) == point->label) {
 // 					validResults++;
 // 				}
 // 			}

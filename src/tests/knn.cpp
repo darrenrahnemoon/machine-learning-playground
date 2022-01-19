@@ -24,19 +24,19 @@ TEST_CASE("K Nearest Neighbor Classifier", "[classifier][knn]") {
 
 	SECTION("Should classify the points correctly with k = 1") {
 		classifier.k = 1;
-		REQUIRE(classifier.predictClass(getDataPoint({ 2 ,1 })) == Class::A);
-		REQUIRE(classifier.predictClass(getDataPoint({ 4 , 3 })) == Class::C);
-		REQUIRE(classifier.predictClass(getDataPoint({ 100, 100 })) == Class::C);
+		REQUIRE(classifier.predict(getDataPoint({ 2 ,1 })) == Class::A);
+		REQUIRE(classifier.predict(getDataPoint({ 4 , 3 })) == Class::C);
+		REQUIRE(classifier.predict(getDataPoint({ 100, 100 })) == Class::C);
 	}
 
 	SECTION("Should classify the points correctly with k = 3") {
 		classifier.k = 3;
-		REQUIRE(classifier.predictClass(getDataPoint({ 4 , 3 })) == Class::C);
+		REQUIRE(classifier.predict(getDataPoint({ 4 , 3 })) == Class::C);
 	}
 
 	SECTION("Should classify the points correctly with k = 4") {
 		classifier.k = 4;
-		REQUIRE(classifier.predictClass(getDataPoint({ 4 , 3 })) == Class::A);
+		REQUIRE(classifier.predict(getDataPoint({ 4 , 3 })) == Class::A);
 	}
 
 
