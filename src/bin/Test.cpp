@@ -1,5 +1,7 @@
 #include "tests/distance.cpp"
-#include "tests/knn.cpp"
+#include "tests/KNN.cpp"
+#include "tests/KMeans.cpp"
+
 
 // #include "lib/data-handlers/MNISTDataHandler.hpp"
 // #include "lib/classifiers/KNN.hpp"

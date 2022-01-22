@@ -5,13 +5,37 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "(lldb) Launch",
+			"name": "Main",
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/build/Main",
 			"args": [],
 			"stopAtEntry": false,
-			"cwd": "${workspaceFolder}/build",
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "lldb"
+		},
+		{
+			"name": "KMeansMetrics",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/build/KMeansMetrics",
+			"args": [],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
+			"environment": [],
+			"externalConsole": false,
+			"MIMode": "lldb"
+		},
+		{
+			"name": "Test",
+			"type": "cppdbg",
+			"request": "launch",
+			"program": "${workspaceFolder}/build/Test",
+			"args": [ "\"[k-means]\"" ],
+			"stopAtEntry": false,
+			"cwd": "${workspaceFolder}",
 			"environment": [],
 			"externalConsole": false,
 			"MIMode": "lldb"

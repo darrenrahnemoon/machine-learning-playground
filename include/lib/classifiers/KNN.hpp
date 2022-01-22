@@ -1,22 +1,23 @@
 #pragma once
 
 #include <memory>
+
 #include "lib/data-handlers/BaseDataHandler.hpp"
+#include "lib/classifiers/BaseClassifier.hpp"
 
 namespace ML {
 	template<typename LabelType, typename FeatureType>
-	class KNN {
-		typedef std::shared_ptr<DataPoint<LabelType, FeatureType>> Data;
+	class KNN : public BaseClassifier<LabelType, FeatureType> {
+		typedef DataPoint<LabelType, FeatureType> Data;
 		public:
 			int k;
-			FeatureType (*distanceCalculationMethod)(Data, Data);
-			std::shared_ptr<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>> dataset;
+			FeatureType (*distanceCalculationMethod)(const Data&, const Data&);
 
 			KNN();
 			~KNN();
 
-			LabelType predict(Data data);
-			std::vector<Data> getNearestNeighbors(Data point);
+			LabelType predict(const Data& data);
+			std::vector<std::shared_ptr<Data>> getNearestNeighbors(const Data& point);
 	};
 
 }

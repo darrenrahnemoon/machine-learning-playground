@@ -19,12 +19,11 @@ namespace ML {
 			double testingDataRatio = 0.20;
 			double validationDataRatio = 0.05;
 
-			std::map<LabelType, int> classToEnumMap;
-
 			BaseDataHandler();
 			~BaseDataHandler();
 
 			virtual void readFromFile();
+
 			/**
 			 * Split the raw data between training, testing, and validation vector
 			 */

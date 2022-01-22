@@ -82,6 +82,7 @@
 		"variant": "cpp"
 	},
 	"cSpell.words": [
+		"minkowsky",
 		"mnist"
 	],
 	"CppHelper.HeaderGuardPattern": "{FILE}_HPP"

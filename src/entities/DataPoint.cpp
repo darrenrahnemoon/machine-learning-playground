@@ -4,23 +4,17 @@
 namespace ML {
 	// SHOULD DO: DRY this out
 	template<typename LabelType, typename FeatureType>
-	DataPoint<LabelType, FeatureType>::DataPoint(std::initializer_list<FeatureType> _featureVector, LabelType _label) : label(_label) {
-		this->featureVector = new std::vector<FeatureType>(_featureVector);
-	}
+	DataPoint<LabelType, FeatureType>::DataPoint(std::initializer_list<FeatureType> _featureVector, LabelType _label) : label(_label), featureVector(_featureVector) {}
 
 	template<typename LabelType, typename FeatureType>
-	DataPoint<LabelType, FeatureType>::DataPoint(std::initializer_list<FeatureType> _featureVector) {
-		this->featureVector = new std::vector<FeatureType>(_featureVector);
-	}
+	DataPoint<LabelType, FeatureType>::DataPoint(std::initializer_list<FeatureType> _featureVector) : featureVector(_featureVector) {}
 
 	template<typename LabelType, typename FeatureType>
-	DataPoint<LabelType, FeatureType>::DataPoint(const int& featureVectorSize) {
-		this->featureVector = new std::vector<FeatureType>(featureVectorSize);
-	}
+	DataPoint<LabelType, FeatureType>::DataPoint(const int& featureVectorSize) : featureVector(featureVectorSize){}
 
 	template<typename LabelType, typename FeatureType>
-	DataPoint<LabelType, FeatureType>::~DataPoint() {
-		delete this->featureVector;
+	bool DataPoint<LabelType, FeatureType>::hasSameFeatures(DataPoint<LabelType, FeatureType> point) {
+		return this->featureVector == point.featureVector;
 	}
 
 }

@@ -3,7 +3,7 @@
 #include <unordered_set>
 #include <iostream>
 
-#include "lib/debug.cpp"
+#include "lib/utils/debug.cpp"
 #include "lib/data-handlers/BaseDataHandler.hpp"
 #include "entities/DataPoint.hpp"
 

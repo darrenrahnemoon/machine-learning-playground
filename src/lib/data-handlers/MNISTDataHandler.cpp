@@ -6,7 +6,10 @@
 #include <map>
 #include <iostream>
 
-#include "lib/debug.cpp"
+#include "lib/utils/debug.cpp"
+#include "lib/utils/endian.cpp"
+#include "lib/utils/file.cpp"
+
 #include "lib/data-handlers/MNISTDataHandler.hpp"
 #include "entities/DataPoint.hpp"
 
@@ -28,8 +31,8 @@ namespace ML {
 	void MNISTDataHandler::readFromFile(std::string featureVectorFilePath, std::string featureLabelFilePath) {
 		debug::timer timer("Reading from vector file "s + featureVectorFilePath + " and label file " + featureLabelFilePath);
 
-		FILE* featureVectorFile = openFile(featureVectorFilePath);
-		FILE* featureLabelFile = openFile(featureLabelFilePath);
+		FILE* featureVectorFile = file::open(featureVectorFilePath);
+		FILE* featureLabelFile = file::open(featureLabelFilePath);
 		std::vector<uint32_t> featureVectorHeader = readHeader(featureVectorFile, 4);
 		std::vector<uint32_t> featureLabelHeader = readHeader(featureLabelFile, 2);
 
@@ -56,25 +59,16 @@ namespace ML {
 						+ std::to_string(imageIndex)
 					);
 				}
-				data->featureVector->push_back(pixel);
+				data->featureVector.push_back(pixel);
 			}
 			this->rawData->push_back(data);
 
 			debug::log::low(
 				"Image:", imageIndex,
 				"Label:", data->label,
-				"Pixel length: ", data->featureVector->size()
+				"Pixel length: ", data->featureVector.size()
 			);
 		}
-	}
-
-	FILE* MNISTDataHandler::openFile(const std::string& path) {
-		debug::timer timer("Opening file: "s + path);
-		FILE* file = fopen(path.c_str(), "rb");
-		if (!file) {
-			throw std::runtime_error("Cannot read file:"s + path);
-		}
-		return file;
 	}
 
 	std::vector<uint32_t> MNISTDataHandler::readHeader(FILE* file, const int& size) {
@@ -83,22 +77,10 @@ namespace ML {
 			if (!fread(&header[i], sizeof(uint32_t), 1, file)) {
 				throw std::runtime_error("Cannot read header");
 			}
-			this->swapEndian(header[i]);
+			utils::swapEndian(header[i]);
 			debug::log::low("Reading Header", i);
 			debug::log::low("Value", header[i]);
 		}
 		return header;
-	}
-
-	template <typename T>
-	void MNISTDataHandler::swapEndian(T &value) {
-		union U {
-			T value;
-			std::array<uint8_t, sizeof(T)> raw;
-		} src, dst;
-
-		src.value = value;
-		std::reverse_copy(src.raw.begin(), src.raw.end(), dst.raw.begin());
-		value = dst.value;
 	}
 }

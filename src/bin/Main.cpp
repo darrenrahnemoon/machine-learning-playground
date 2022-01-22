@@ -1,12 +1,12 @@
 #include <iostream>
 
-#include "lib/debug.cpp"
+#include "lib/utils/debug.cpp"
 #include "lib/data-handlers/MNISTDataHandler.hpp"
 #include "lib/classifiers/KNN.hpp"
-#include "lib/distance.hpp"
+#include "lib/distance/euclidean.hpp"
 
 int main() {
-	debug::timer timer("Main");
+	ML::debug::timer timer("Main");
 
 	ML::MNISTDataHandler dataHandler;
 	dataHandler.readFromFile("../assets/mnist/train-images-idx3-ubyte", "../assets/mnist/train-labels-idx1-ubyte");
@@ -20,7 +20,7 @@ int main() {
 	double correctPredictionsCount = 0;
 	for (int i = 0; i < dataHandler.testingData->size(); i++) {
 		auto point = dataHandler.testingData->at(i);
-		auto prediction = classifier.predict(point);
+		auto prediction = classifier.predict(*point);
 		if (prediction == point->label) {
 			correctPredictionsCount++;
 		}

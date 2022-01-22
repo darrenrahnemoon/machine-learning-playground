@@ -7,13 +7,14 @@ namespace ML {
 	template<typename LabelType, typename FeatureType>
 	class DataPoint {
 		public :
-			std::vector<FeatureType>* featureVector;
+			std::vector<FeatureType> featureVector;
 			LabelType label;
 
 			DataPoint(const int& featureVectorSize = 0);
 			DataPoint(std::initializer_list<FeatureType> featureVector, LabelType label);
 			DataPoint(std::initializer_list<FeatureType> featureVector);
-			~DataPoint();
+
+			bool hasSameFeatures(DataPoint<LabelType, FeatureType> point);
 	};
 };
 
