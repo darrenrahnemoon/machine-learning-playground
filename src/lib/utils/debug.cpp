@@ -75,8 +75,8 @@ namespace ML {
 
 				void stop() {
 					auto endTime = std::chrono::high_resolution_clock::now();
-					auto duration = std::chrono::duration_cast<std::chrono::microseconds>(endTime - startTime);
-					log::medium("Timer", this->name, "took", duration.count(), "microseconds");
+					auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+					log::medium("Timer", this->name, "took", duration.count(), "ms");
 				}
 		};
 	}

@@ -54,7 +54,10 @@ namespace ML {
 		}
 
 		while (true) {
+			debug::timer timer("Partition iteration");
+
 			for (int currentClusterIndex = 0; currentClusterIndex < this->clusters.size(); currentClusterIndex++) {
+				debug::timer timer("Cluster iteration");
 				auto& currentCluster = this->clusters[currentClusterIndex];
 
 				for (int pointIndex = 0; pointIndex < currentCluster.members.size(); pointIndex++) {
@@ -101,6 +104,8 @@ namespace ML {
 
 	template<typename LabelType, typename FeatureType>
 	void KMeans<LabelType, FeatureType>::ensureClustersCentroidsAreAdjusted(const bool& multithreaded) {
+		debug::timer timer("Ensuring cluster centroids are adjusted");
+
 		if (multithreaded) {
 			std::thread threads[this->clusters.size()];
 			for (int i = 0; i < this->clusters.size(); i++) {
@@ -120,6 +125,8 @@ namespace ML {
 
 	template<typename LabelType, typename FeatureType>
 	void KMeans<LabelType, FeatureType>::ensureClustersMostFrequentLabelIdentified(const bool& multithreaded) {
+		debug::timer timer("Ensuring clusters' most frequent label is identified");
+
 		if (multithreaded) {
 			std::thread threads[this->clusters.size()];
 			for (int i = 0; i < this->clusters.size(); i++) {
