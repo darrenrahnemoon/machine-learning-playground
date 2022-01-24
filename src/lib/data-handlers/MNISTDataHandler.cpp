@@ -61,7 +61,7 @@ namespace ML {
 				}
 				data->featureVector.push_back(pixel);
 			}
-			this->rawData->push_back(data);
+			this->dataset->push_back(data);
 
 			utils::log::low(
 				"Image:", imageIndex,

@@ -15,11 +15,11 @@ int main() {
 	ML::KNN<uint8_t, uint8_t> model;
 	model.k = 2;
 	model.distanceCalculationMethod = ML::distance::euclideanDistance;
-	model.dataset = dataHandler.trainingData;
+	model.dataset = dataHandler.trainingDataset;
 
 	double correctPredictionsCount = 0;
-	for (int i = 0; i < dataHandler.testingData->size(); i++) {
-		auto point = dataHandler.testingData->at(i);
+	for (int i = 0; i < dataHandler.validationDatasetset->size(); i++) {
+		auto point = dataHandler.validationDatasetset->at(i);
 		auto prediction = model.predict(*point);
 		if (prediction == point->label) {
 			correctPredictionsCount++;
@@ -31,5 +31,5 @@ int main() {
 			<< ", Correct: " << correctPredictionsCount 
 			<< std::endl;
 	}
-	std::cout << correctPredictionsCount / dataHandler.testingData->size() * 100;
+	std::cout << correctPredictionsCount / dataHandler.validationDatasetset->size() * 100;
 }

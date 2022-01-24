@@ -11,9 +11,9 @@ namespace ML {
 
 	template<typename LabelType, typename FeatureType>
 	BaseDataHandler<LabelType, FeatureType>::BaseDataHandler() {
-		this->rawData = std::make_shared<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>>();
-		this->trainingData = std::make_shared<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>>();
-		this->testingData = std::make_shared<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>>();
+		this->dataset = std::make_shared<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>>();
+		this->trainingDataset = std::make_shared<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>>();
+		this->validationDatasetset = std::make_shared<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>>();
 		this->validationData = std::make_shared<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>>();
 	}
 
@@ -30,34 +30,34 @@ namespace ML {
 	void BaseDataHandler<LabelType, FeatureType>::allocateDataAtRandom() {
 		utils::timer timer("Allocating data at random");
 
-		auto& rawData = this->rawData;
-		int rawDataSize = this->rawData->size();
-		std::unordered_set<int> usedIndexes(rawDataSize);
+		auto& dataset = this->dataset;
+		int datasetSize = this->dataset->size();
+		std::unordered_set<int> usedIndexes(datasetSize);
 
 		// Reserve the vector space to improve performance
-		int trainingDataSize = rawDataSize * this->trainingDataRatio;
-		this->trainingData->reserve(trainingDataSize);
+		int trainingDatasetSize = datasetSize * this->trainingDatasetRatio;
+		this->trainingDataset->reserve(trainingDatasetSize);
 
-		int testingDataSize = rawDataSize * this->testingDataRatio;
-		this->testingData->reserve(testingDataSize);
+		int validationDatasetsetSize = datasetSize * this->validationDatasetsetRatio;
+		this->validationDatasetset->reserve(validationDatasetsetSize);
 
-		int validationDataSize = rawDataSize * this->validationDataRatio;
+		int validationDataSize = datasetSize * this->validationDataRatio;
 		this->validationData->reserve(validationDataSize);
 
-		auto allocateAtRandom = [&usedIndexes, &rawData, &rawDataSize](auto& array, int&count) {
+		auto allocateAtRandom = [&usedIndexes, &dataset, &datasetSize](auto& array, int&count) {
 			int allocated = 0;
 			while (allocated < count) {
-				int randomIndex = rand() % rawDataSize;
+				int randomIndex = rand() % datasetSize;
 				if (usedIndexes.find(randomIndex) == usedIndexes.end()) {
-					array->push_back((*rawData)[randomIndex]);
+					array->push_back((*dataset)[randomIndex]);
 					usedIndexes.insert(randomIndex);
 					allocated++;
 				}
 			}
 		};
 
-		utils::timer::call("Allocating data points at random to training data", allocateAtRandom, trainingData, trainingDataSize);
-		utils::timer::call("Allocating data points at random to testing data", allocateAtRandom, testingData, testingDataSize);
+		utils::timer::call("Allocating data points at random to training data", allocateAtRandom, trainingDataset, trainingDatasetSize);
+		utils::timer::call("Allocating data points at random to testing data", allocateAtRandom, validationDatasetset, validationDatasetsetSize);
 		utils::timer::call("Allocating data points at random to validation data", allocateAtRandom, validationData, validationDataSize);
 	}
 }

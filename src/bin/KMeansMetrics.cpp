@@ -6,14 +6,16 @@
 #include "lib/distance/euclidean.hpp"
 
 int main() {
-	ML::utils::timer timer("KMeansMetrics");
-	ML::MNISTDataHandler dataHandler;
+	using namespace ML;
+
+	utils::timer timer("KMeansMetrics");
+	MNISTDataHandler dataHandler;
 	dataHandler.readFromFile("./assets/mnist/train-images-idx3-ubyte", "./assets/mnist/train-labels-idx1-ubyte");
 	dataHandler.allocateDataAtRandom();
 
 	for (int k = 50; k < 1000; k++) {
-		auto model = ML::KMeans<uint8_t, uint8_t>();
-		model.dataset = dataHandler.trainingData;
+		auto model = KMeans<uint8_t, uint8_t>();
+		model.dataset = dataHandler.trainingDataset;
 		model.k = k;
 
 		model.chooseCentroidsAtRanddom();
@@ -22,11 +24,11 @@ int main() {
 		model.ensureClustersMostFrequentLabelIdentified();
 
 		int correctPredictionCount = 0;
-		for (auto point : *(dataHandler.testingData)) {
-			uint8_t closestDistance = ML::distance::euclideanDistance(*point, model.clusters.at(0).centroid);
+		for (auto point : *(dataHandler.validationDatasetset)) {
+			uint8_t closestDistance = distance::euclideanDistance(*point, model.clusters.at(0).centroid);
 			auto* closestCluster = &(model.clusters.at(0));
 			for (auto cluster : model.clusters) {
-				auto distance = ML::distance::euclideanDistance(*point, cluster.centroid);
+				auto distance = distance::euclideanDistance(*point, cluster.centroid);
 				if (distance < closestDistance) {
 					closestDistance = distance;
 					closestCluster = &cluster;
@@ -37,7 +39,7 @@ int main() {
 			}
 		}
 
-		std::cout << "Correct: " << correctPredictionCount << "/" << dataHandler.testingData->size() << std::endl;
-		std::cout << "K = " << model.k << " | Accuracy: " << (double)correctPredictionCount / (double)(dataHandler.testingData->size()) * 100 << "%";
+		std::cout << "Correct: " << correctPredictionCount << "/" << dataHandler.validationDatasetset->size() << std::endl;
+		std::cout << "K = " << model.k << " | Accuracy: " << (double)correctPredictionCount / (double)(dataHandler.validationDatasetset->size()) * 100 << "%";
 	}
 }

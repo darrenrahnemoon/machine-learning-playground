@@ -12,20 +12,20 @@
 // 	dataHandler.allocateDataAtRandom();
 
 // 	ML::KNN<uint8_t, uint8_t> model;
-// 	model.dataset = dataHandler.trainingData;
+// 	model.dataset = dataHandler.trainingDataset;
 
 // 	SECTION("Using Euclidian Distance") {
 // 		model.distanceCalculationMethod = ML::KNN<uint8_t, uint8_t>::EuclidianDistance;
 // 		model.k = GENERATE(3, 4, 5, 6, 7);
 // 		SECTION("K: "s + std::to_string(model.k)) {
 // 			int validResults = 0;
-// 			for (auto point : *(dataHandler.testingData)) {
+// 			for (auto point : *(dataHandler.validationDatasetset)) {
 // 				if (model.predict(point) == point->label) {
 // 					validResults++;
 // 				}
 // 			}
 
-// 			CHECK(validResults > 0.8 * dataHandler.testingData->size());
+// 			CHECK(validResults > 0.8 * dataHandler.validationDatasetset->size());
 // 		}
 // 	}
 // }
