@@ -2,7 +2,7 @@
 
 #include "lib/utils/debug.cpp"
 #include "lib/data-handlers/MNISTDataHandler.hpp"
-#include "lib/classifiers/KMeans.hpp"
+#include "lib/models/KMeans.hpp"
 #include "lib/distance/euclidean.hpp"
 
 int main() {
@@ -12,20 +12,20 @@ int main() {
 	dataHandler.allocateDataAtRandom();
 
 	for (int k = 50; k < 1000; k++) {
-		auto classifier = ML::KMeans<uint8_t, uint8_t>();
-		classifier.dataset = dataHandler.trainingData;
-		classifier.k = k;
+		auto model = ML::KMeans<uint8_t, uint8_t>();
+		model.dataset = dataHandler.trainingData;
+		model.k = k;
 
-		classifier.chooseCentroidsAtRanddom();
-		classifier.partition();
+		model.chooseCentroidsAtRanddom();
+		model.partition();
 
-		classifier.ensureClustersMostFrequentLabelIdentified();
+		model.ensureClustersMostFrequentLabelIdentified();
 
 		int correctPredictionCount = 0;
 		for (auto point : *(dataHandler.testingData)) {
-			uint8_t closestDistance = ML::distance::euclideanDistance(*point, classifier.clusters.at(0).centroid);
-			auto* closestCluster = &(classifier.clusters.at(0));
-			for (auto cluster : classifier.clusters) {
+			uint8_t closestDistance = ML::distance::euclideanDistance(*point, model.clusters.at(0).centroid);
+			auto* closestCluster = &(model.clusters.at(0));
+			for (auto cluster : model.clusters) {
 				auto distance = ML::distance::euclideanDistance(*point, cluster.centroid);
 				if (distance < closestDistance) {
 					closestDistance = distance;
@@ -38,6 +38,6 @@ int main() {
 		}
 
 		std::cout << "Correct: " << correctPredictionCount << "/" << dataHandler.testingData->size() << std::endl;
-		std::cout << "K = " << classifier.k << " | Accuracy: " << (double)correctPredictionCount / (double)(dataHandler.testingData->size()) * 100 << "%";
+		std::cout << "K = " << model.k << " | Accuracy: " << (double)correctPredictionCount / (double)(dataHandler.testingData->size()) * 100 << "%";
 	}
 }

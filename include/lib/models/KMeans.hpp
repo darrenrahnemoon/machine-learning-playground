@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 
-#include "lib/classifiers/BaseClassifier.hpp"
+#include "lib/models/BaseModel.hpp"
 
 #include "entities/DataPoint.hpp"
 
@@ -20,7 +20,7 @@ namespace ML {
 	};
 
 	template<typename LabelType, typename FeatureType>
-	class KMeans : public BaseClassifier<LabelType, FeatureType> {
+	class KMeans : public BaseModel<LabelType, FeatureType> {
 		public :
 			int k;
 			std::vector<Cluster<LabelType, FeatureType>> clusters;
@@ -40,4 +40,4 @@ namespace ML {
 
 }
 
-#include "lib/classifiers/KMeans.cpp"
+#include "lib/models/KMeans.cpp"

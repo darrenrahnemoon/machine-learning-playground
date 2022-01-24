@@ -3,11 +3,11 @@
 #include <memory>
 
 #include "lib/data-handlers/BaseDataHandler.hpp"
-#include "lib/classifiers/BaseClassifier.hpp"
+#include "lib/models/BaseModel.hpp"
 
 namespace ML {
 	template<typename LabelType, typename FeatureType>
-	class KNN : public BaseClassifier<LabelType, FeatureType> {
+	class KNN : public BaseModel<LabelType, FeatureType> {
 		typedef DataPoint<LabelType, FeatureType> Data;
 		public:
 			int k;
@@ -22,4 +22,4 @@ namespace ML {
 
 }
 
-#include "lib/classifiers/KNN.cpp"
+#include "lib/models/KNN.cpp"

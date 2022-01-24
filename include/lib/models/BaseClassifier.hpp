@@ -7,7 +7,7 @@
 namespace ML {
 
 	template<typename LabelType, typename FeatureType>
-	class BaseClassifier {
+	class BaseModel {
 		public : 
 			std::shared_ptr<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>> dataset;
 	};

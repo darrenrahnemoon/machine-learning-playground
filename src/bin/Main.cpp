@@ -2,7 +2,7 @@
 
 #include "lib/utils/debug.cpp"
 #include "lib/data-handlers/MNISTDataHandler.hpp"
-#include "lib/classifiers/KNN.hpp"
+#include "lib/models/KNN.hpp"
 #include "lib/distance/euclidean.hpp"
 
 int main() {
@@ -12,15 +12,15 @@ int main() {
 	dataHandler.readFromFile("../assets/mnist/train-images-idx3-ubyte", "../assets/mnist/train-labels-idx1-ubyte");
 	dataHandler.allocateDataAtRandom();
 
-	ML::KNN<uint8_t, uint8_t> classifier;
-	classifier.k = 2;
-	classifier.distanceCalculationMethod = ML::distance::euclideanDistance;
-	classifier.dataset = dataHandler.trainingData;
+	ML::KNN<uint8_t, uint8_t> model;
+	model.k = 2;
+	model.distanceCalculationMethod = ML::distance::euclideanDistance;
+	model.dataset = dataHandler.trainingData;
 
 	double correctPredictionsCount = 0;
 	for (int i = 0; i < dataHandler.testingData->size(); i++) {
 		auto point = dataHandler.testingData->at(i);
-		auto prediction = classifier.predict(*point);
+		auto prediction = model.predict(*point);
 		if (prediction == point->label) {
 			correctPredictionsCount++;
 		}

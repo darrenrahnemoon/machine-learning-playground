@@ -7,7 +7,7 @@
 
 #include "lib/utils/debug.cpp"
 #include "lib/distance/euclidean.hpp"
-#include "lib/classifiers/KMeans.hpp"
+#include "lib/models/KMeans.hpp"
 
 namespace ML {
 
