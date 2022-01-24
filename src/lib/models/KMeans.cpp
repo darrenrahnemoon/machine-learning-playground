@@ -5,7 +5,7 @@
 #include <unordered_set>
 #include <map>
 
-#include "lib/utils/debug.cpp"
+#include "lib/utils/timer.cpp"
 #include "lib/distance/euclidean.hpp"
 #include "lib/models/KMeans.hpp"
 

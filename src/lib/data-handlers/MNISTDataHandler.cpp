@@ -4,9 +4,9 @@
 #include <array>
 #include <vector>
 #include <map>
-#include <iostream>
 
-#include "lib/utils/debug.cpp"
+#include "lib/utils/timer.cpp"
+#include "lib/utils/log.cpp"
 #include "lib/utils/endian.cpp"
 #include "lib/utils/file.cpp"
 
@@ -29,7 +29,7 @@ namespace ML {
 	};
 
 	void MNISTDataHandler::readFromFile(std::string featureVectorFilePath, std::string featureLabelFilePath) {
-		debug::timer timer("Reading from vector file "s + featureVectorFilePath + " and label file " + featureLabelFilePath);
+		utils::timer timer("Reading from vector file "s + featureVectorFilePath + " and label file " + featureLabelFilePath);
 
 		FILE* featureVectorFile = file::open(featureVectorFilePath);
 		FILE* featureLabelFile = file::open(featureLabelFilePath);
@@ -63,7 +63,7 @@ namespace ML {
 			}
 			this->rawData->push_back(data);
 
-			debug::log::low(
+			utils::log::low(
 				"Image:", imageIndex,
 				"Label:", data->label,
 				"Pixel length: ", data->featureVector.size()
@@ -78,8 +78,8 @@ namespace ML {
 				throw std::runtime_error("Cannot read header");
 			}
 			utils::swapEndian(header[i]);
-			debug::log::low("Reading Header", i);
-			debug::log::low("Value", header[i]);
+			utils::log::low("Reading Header", i);
+			utils::log::low("Value", header[i]);
 		}
 		return header;
 	}

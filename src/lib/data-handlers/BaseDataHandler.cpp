@@ -3,7 +3,7 @@
 #include <unordered_set>
 #include <iostream>
 
-#include "lib/utils/debug.cpp"
+#include "lib/utils/timer.cpp"
 #include "lib/data-handlers/BaseDataHandler.hpp"
 #include "entities/DataPoint.hpp"
 
@@ -28,7 +28,7 @@ namespace ML {
 
 	template<typename LabelType, typename FeatureType>
 	void BaseDataHandler<LabelType, FeatureType>::allocateDataAtRandom() {
-		debug::timer timer("Allocating data at random");
+		utils::timer timer("Allocating data at random");
 
 		auto& rawData = this->rawData;
 		int rawDataSize = this->rawData->size();
@@ -56,9 +56,9 @@ namespace ML {
 			}
 		};
 
-		debug::timer::call("Allocating data points at random to training data", allocateAtRandom, trainingData, trainingDataSize);
-		debug::timer::call("Allocating data points at random to testing data", allocateAtRandom, testingData, testingDataSize);
-		debug::timer::call("Allocating data points at random to validation data", allocateAtRandom, validationData, validationDataSize);
+		utils::timer::call("Allocating data points at random to training data", allocateAtRandom, trainingData, trainingDataSize);
+		utils::timer::call("Allocating data points at random to testing data", allocateAtRandom, testingData, testingDataSize);
+		utils::timer::call("Allocating data points at random to validation data", allocateAtRandom, validationData, validationDataSize);
 	}
 }
 

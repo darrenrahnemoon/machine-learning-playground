@@ -1,12 +1,12 @@
 #include <iostream>
 
-#include "lib/utils/debug.cpp"
+#include "lib/utils/timer.cpp"
 #include "lib/data-handlers/MNISTDataHandler.hpp"
 #include "lib/models/KNN.hpp"
 #include "lib/distance/euclidean.hpp"
 
 int main() {
-	ML::debug::timer timer("Main");
+	ML::utils::timer timer("Main");
 
 	ML::MNISTDataHandler dataHandler;
 	dataHandler.readFromFile("../assets/mnist/train-images-idx3-ubyte", "../assets/mnist/train-labels-idx1-ubyte");

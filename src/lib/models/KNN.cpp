@@ -2,7 +2,7 @@
 #include <exception>
 #include <algorithm>
 
-#include "lib/utils/debug.cpp"
+#include "lib/utils/timer.cpp"
 #include "lib/data-handlers/BaseDataHandler.hpp"
 #include "lib/models/KNN.hpp"
 #include "lib/distance/euclidean.hpp"
