@@ -6,20 +6,21 @@
 #include "lib/distance/euclidean.hpp"
 
 int main() {
-	ML::utils::timer timer("Main");
+	using namespace ML;
+	utils::timer timer("Main");
 
-	ML::MNISTDataHandler dataHandler;
-	dataHandler.readFromFile("../assets/mnist/train-images-idx3-ubyte", "../assets/mnist/train-labels-idx1-ubyte");
+	MNISTDataHandler dataHandler;
+	dataHandler.readFromFile("./assets/mnist/train-images-idx3-ubyte", "./assets/mnist/train-labels-idx1-ubyte");
 	dataHandler.allocateDataAtRandom();
 
-	ML::KNN<uint8_t, uint8_t> model;
+	KNN<uint8_t, uint8_t> model;
 	model.k = 2;
-	model.distanceCalculationMethod = ML::distance::euclideanDistance;
+	model.distanceCalculationMethod = distance::euclideanDistance;
 	model.dataset = dataHandler.trainingDataset;
 
 	double correctPredictionsCount = 0;
-	for (int i = 0; i < dataHandler.validationDatasetset->size(); i++) {
-		auto point = dataHandler.validationDatasetset->at(i);
+	for (int i = 0; i < dataHandler.validationDataset->size(); i++) {
+		auto point = dataHandler.validationDataset->at(i);
 		auto prediction = model.predict(*point);
 		if (prediction == point->label) {
 			correctPredictionsCount++;
@@ -31,5 +32,5 @@ int main() {
 			<< ", Correct: " << correctPredictionsCount 
 			<< std::endl;
 	}
-	std::cout << correctPredictionsCount / dataHandler.validationDatasetset->size() * 100;
+	std::cout << correctPredictionsCount / dataHandler.validationDataset->size() * 100;
 }

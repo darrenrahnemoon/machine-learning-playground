@@ -24,7 +24,7 @@ int main() {
 		model.ensureClustersMostFrequentLabelIdentified();
 
 		int correctPredictionCount = 0;
-		for (auto point : *(dataHandler.validationDatasetset)) {
+		for (auto point : *(dataHandler.validationDataset)) {
 			uint8_t closestDistance = distance::euclideanDistance(*point, model.clusters.at(0).centroid);
 			auto* closestCluster = &(model.clusters.at(0));
 			for (auto cluster : model.clusters) {
@@ -39,7 +39,7 @@ int main() {
 			}
 		}
 
-		std::cout << "Correct: " << correctPredictionCount << "/" << dataHandler.validationDatasetset->size() << std::endl;
-		std::cout << "K = " << model.k << " | Accuracy: " << (double)correctPredictionCount / (double)(dataHandler.validationDatasetset->size()) * 100 << "%";
+		std::cout << "Correct: " << correctPredictionCount << "/" << dataHandler.validationDataset->size() << std::endl;
+		std::cout << "K = " << model.k << " | Accuracy: " << (double)correctPredictionCount / (double)(dataHandler.validationDataset->size()) * 100 << "%" << std::endl;
 	}
 }

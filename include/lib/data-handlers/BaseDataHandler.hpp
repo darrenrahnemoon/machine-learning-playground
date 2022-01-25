@@ -13,11 +13,11 @@ namespace ML {
 			std::shared_ptr<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>> dataset;
 			std::shared_ptr<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>> trainingDataset;
 			std::shared_ptr<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>> testingDataset;
-			std::shared_ptr<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>> validationData;
+			std::shared_ptr<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>> validationDataset;
 
 			double trainingDatasetRatio = 0.75;
 			double testingDatasetRatio = 0.20;
-			double validationDataRatio = 0.05;
+			double validationDatasetRatio = 0.05;
 
 			BaseDataHandler();
 			~BaseDataHandler();

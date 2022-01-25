@@ -19,13 +19,13 @@
 // 		model.k = GENERATE(3, 4, 5, 6, 7);
 // 		SECTION("K: "s + std::to_string(model.k)) {
 // 			int validResults = 0;
-// 			for (auto point : *(dataHandler.validationDatasetset)) {
+// 			for (auto point : *(dataHandler.validationDataset)) {
 // 				if (model.predict(point) == point->label) {
 // 					validResults++;
 // 				}
 // 			}
 
-// 			CHECK(validResults > 0.8 * dataHandler.validationDatasetset->size());
+// 			CHECK(validResults > 0.8 * dataHandler.validationDataset->size());
 // 		}
 // 	}
 // }

@@ -14,8 +14,6 @@
 #include "entities/DataPoint.hpp"
 
 namespace ML {
-	using namespace std::string_literals;
-
 	std::map<std::string, int> FeatureVectorHeader = {
 		{ "MagicNumber", 0 },
 		{ "NumberOfImages", 1 },
@@ -29,6 +27,7 @@ namespace ML {
 	};
 
 	void MNISTDataHandler::readFromFile(std::string featureVectorFilePath, std::string featureLabelFilePath) {
+		using namespace std::string_literals;
 		utils::timer timer("Reading from vector file "s + featureVectorFilePath + " and label file " + featureLabelFilePath);
 
 		FILE* featureVectorFile = file::open(featureVectorFilePath);
