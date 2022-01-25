@@ -4,7 +4,7 @@ I can't afford to pay for private repositories so I guess you can use my code to
 
 ## Setup
 
-Go figure it out yourself.
+Figuring it out yourself is more fun.
 
 ## PR Policy
 
