@@ -20,7 +20,6 @@ int main() {
 
 		model.chooseCentroidsAtRanddom();
 		model.partition();
-
 		model.ensureClustersMostFrequentLabelIdentified();
 
 		int correctPredictionCount = 0;

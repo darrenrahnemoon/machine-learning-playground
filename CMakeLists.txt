@@ -12,6 +12,7 @@ file( GLOB EntitiesHeader include/entities/**/*.h )
 set( Executables 
 	Main
 	KMeansMetrics
+	KNNMetrics
 )
 
 foreach( Executable ${Executables} )
