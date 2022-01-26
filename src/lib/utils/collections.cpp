@@ -1,5 +1,8 @@
+#pragma once
+
 #include <vector>
 #include <unordered_set>
+#include <algorithm>
 
 namespace ML {
 	namespace utils {
@@ -50,26 +53,36 @@ namespace ML {
 			}
 
 			template <typename T>
-			std::vector<T> filter(const std::vector<T>& source, Iterator<T, bool> check) {
+			std::vector<T> filter(const std::vector<T>& collection, Iterator<T, bool> check) {
 				std::vector<T> filtered;
-
-				for (int i = 0; i < source.size(); i++) {
-					if (check(source[i], i, source)) {
-						filtered.push_back(source[i]);
+				for (int i = 0; i < collection.size(); i++) {
+					if (check(collection[i], i, collection)) {
+						filtered.push_back(collection[i]);
 					}
 				}
-
 				return filtered;
 			}
 
 			template <typename T, typename K>
-			std::vector<K> mapValues(const std::vector<T>& source, Iterator<T, K> transform) {
+			std::vector<K> mapValues(const std::vector<T>& collection, Iterator<T, K> transform) {
 				std::vector<K> mapped;
-				mapped.reserve(source.size());
-				for (int i = 0; i < source.size(); i++) {
-					mapped.push_back(transform(source[i], i, source));
+				mapped.reserve(collection.size());
+				for (int i = 0; i < collection.size(); i++) {
+					mapped.push_back(transform(collection[i], i, collection));
 				}
 				return mapped;
+			}
+
+			template<typename T, typename C>
+			std::vector<T> getTop(int numberOfItems, const std::vector<T>& collection, C compare) {
+				std::vector<T> result;
+				result.resize(numberOfItems);
+				std::partial_sort_copy(
+					std::begin(collection), std::end(collection),
+					std::begin(result), std::end(result),
+					compare
+				);
+				return result;
 			}
 		}
 	}
