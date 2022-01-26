@@ -13,10 +13,9 @@ namespace ML {
 	class Cluster {
 		public :
 			DataPoint<LabelType, FeatureType> centroid;
-			std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>> members;
+			Dataset<LabelType, FeatureType> members;
 			LabelType identifyMostFrequentLabel();
 			void ensureCentroidIsAdjusted();
-
 	};
 
 	template<typename LabelType, typename FeatureType>
@@ -29,7 +28,7 @@ namespace ML {
 			KMeans();
 			~KMeans();
 
-			void chooseCentroidsAtRanddom();
+			void chooseCentroidsAtRandom();
 			void chooseCentroidsUsingKMeansPlusPlus();
 			void ensureClustersCentroidsAreAdjusted(const bool& multithreaded = false);
 			void ensureClustersMostFrequentLabelIdentified(const bool& multithreaded = false);

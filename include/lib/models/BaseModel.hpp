@@ -2,6 +2,7 @@
 
 #include <memory>
 
+#include "lib/data-handlers/BaseDataHandler.hpp"
 #include "entities/DataPoint.hpp"
 
 namespace ML {
@@ -9,7 +10,7 @@ namespace ML {
 	template<typename LabelType, typename FeatureType>
 	class BaseModel {
 		public : 
-			std::shared_ptr<std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>> dataset;
+			std::shared_ptr<Dataset<LabelType, FeatureType>> dataset;
 	};
 
 }

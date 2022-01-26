@@ -27,7 +27,7 @@ TEST_CASE("K-Means Clustering Algorithm", "[model][k-means]") {
 
 	model.k = 4;
 
-	model.chooseCentroidsAtRanddom();
+	model.chooseCentroidsAtRandom();
 
 	SECTION("Should partition the data correctly") {
 		model.partition();

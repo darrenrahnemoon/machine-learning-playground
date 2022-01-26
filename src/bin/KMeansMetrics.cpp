@@ -2,8 +2,8 @@
 
 #include "lib/utils/timer.cpp"
 #include "lib/data-handlers/MNISTDataHandler.hpp"
-#include "lib/models/KMeans.hpp"
 #include "lib/distance/euclidean.hpp"
+#include "lib/models/KMeans.hpp"
 
 int main() {
 	using namespace ML;
@@ -18,7 +18,7 @@ int main() {
 		model.dataset = dataHandler.trainingDataset;
 		model.k = k;
 
-		model.chooseCentroidsAtRanddom();
+		model.chooseCentroidsAtRandom();
 		model.partition();
 		model.ensureClustersMostFrequentLabelIdentified();
 

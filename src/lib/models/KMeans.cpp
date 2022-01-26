@@ -18,7 +18,7 @@ namespace ML {
 	KMeans<LabelType, FeatureType>::~KMeans() {}
 
 	template<typename LabelType, typename FeatureType>
-	void KMeans<LabelType, FeatureType>::chooseCentroidsAtRanddom() {
+	void KMeans<LabelType, FeatureType>::chooseCentroidsAtRandom() {
 		this->clusters.clear();
 		this->clusters.reserve(this->k);
 
@@ -138,8 +138,6 @@ namespace ML {
 			}
 		}
 	}
-
-	
 
 	template<typename LabelType, typename FeatureType>
 	LabelType Cluster<LabelType, FeatureType>::identifyMostFrequentLabel() {

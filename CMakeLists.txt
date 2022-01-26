@@ -3,11 +3,7 @@ cmake_minimum_required( VERSION 3.22 )
 project( MachineLearning )
 set( CMAKE_CXX_STANDARD 20 )
 set( CMAKE_CXX_STANDARD_REQUIRED True )
-
-file( GLOB LibrariesSource src/lib/**/*.cpp )
-file( GLOB LibrariesHeader include/lib/**/*.h )
-file( GLOB EntitiesSource src/entities/**/*.cpp )
-file( GLOB EntitiesHeader include/entities/**/*.h )
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${ADDITIONAL_CFLAGS} -g")
 
 set( Executables 
 	Main

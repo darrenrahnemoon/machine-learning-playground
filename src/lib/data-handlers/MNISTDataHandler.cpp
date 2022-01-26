@@ -39,6 +39,8 @@ namespace ML {
 			throw std::runtime_error("Number of images in the header of feature vector file does not match the number of labels in the header of feature elabel file");
 		}
 
+		this->dataset = std::make_shared<Dataset<uint8_t, uint8_t>>();
+
 		uint8_t pixel;
 		uint32_t imageSize = featureVectorHeader[FeatureVectorHeader["RowSize"]] * featureVectorHeader[FeatureVectorHeader["ColumnSize"]];
 
