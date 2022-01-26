@@ -9,8 +9,8 @@ namespace ML {
 
 	template<typename LabelType, typename FeatureType>
 	class BaseModel {
-		public : 
-			std::shared_ptr<Dataset<LabelType, FeatureType>> dataset;
+		public :
+			SharedDataset<LabelType, FeatureType> dataset;
 	};
 
 }

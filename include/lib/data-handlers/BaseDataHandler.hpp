@@ -9,15 +9,19 @@
 namespace ML {
 
 	template<typename LabelType, typename FeatureType>
-	using Dataset = std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>>;
+	using Dataset = std::vector<SharedDataPoint<LabelType, FeatureType>>;
+
+	template<typename LabelType, typename FeatureType>
+	using SharedDataset = std::shared_ptr<Dataset<LabelType, FeatureType>>;
+
 
 	template<typename LabelType, typename FeatureType>
 	class BaseDataHandler {
 		public :
-			std::shared_ptr<Dataset<LabelType, FeatureType>> dataset;
-			std::shared_ptr<Dataset<LabelType, FeatureType>> trainingDataset;
-			std::shared_ptr<Dataset<LabelType, FeatureType>> testingDataset;
-			std::shared_ptr<Dataset<LabelType, FeatureType>> validationDataset;
+			SharedDataset<LabelType, FeatureType> dataset;
+			SharedDataset<LabelType, FeatureType> trainingDataset;
+			SharedDataset<LabelType, FeatureType> testingDataset;
+			SharedDataset<LabelType, FeatureType> validationDataset;
 
 			double trainingDatasetRatio = 0.75;
 			double testingDatasetRatio = 0.20;

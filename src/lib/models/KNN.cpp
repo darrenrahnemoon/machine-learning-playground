@@ -40,8 +40,8 @@ namespace ML {
 	}
 
 	template<typename LabelType, typename FeatureType>
-	std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>> KNN<LabelType, FeatureType>::getNearestNeighbors(const DataPoint<LabelType, FeatureType>& point) {
-		std::vector<std::shared_ptr<DataPoint<LabelType, FeatureType>>> neighbors(this->k);
+	std::vector<SharedDataPoint<LabelType, FeatureType>> KNN<LabelType, FeatureType>::getNearestNeighbors(const DataPoint<LabelType, FeatureType>& point) {
+		std::vector<SharedDataPoint<LabelType, FeatureType>> neighbors(this->k);
 		std::vector<FeatureType> neighborsDistance(this->k);
 		std::vector<FeatureType> allDistances(this->dataset->size());
 

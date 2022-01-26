@@ -16,6 +16,9 @@ namespace ML {
 
 			bool hasSameFeatures(DataPoint<LabelType, FeatureType> point);
 	};
-};
+
+	template<typename LabelType, typename FeatureType>
+	using SharedDataPoint = std::shared_ptr<DataPoint<LabelType, FeatureType>>;
+}
 
 #include "entities/DataPoint.cpp"
